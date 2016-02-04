@@ -1,0 +1,191 @@
+<h2>About this site</h2>
+
+<h3>Specifications</h3>
+
+<p>This page describes the layout of the site database, data formats, and
+REST API according to the Assignment 2 specification.</p>
+
+<table>
+	<caption>Database Schema</caption>
+	<thead>
+		<tr>
+			<th>Table</th>
+			<th>Column Name</th>
+			<th>Type</th>
+			<th>Key</th>
+			<th>Extra</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th rowspan="3">Polls</th>
+			<td>id</td>
+			<td>int(11)</td>
+			<td>Primary</td>
+			<td>autoincrement</td>
+			<td>Uniquely identifies a poll record</td>
+		</tr>
+		<tr>
+			<td>Title</td>
+			<td>varchar(50)</td>
+			<td></td>
+			<td></td>
+			<td>Short description of poll, e.g. "Food"</td>
+		</tr>
+		<tr>
+			<td>Question</td>
+			<td>varchar(255)</td>
+			<td></td>
+			<td></td>
+			<td>Question posed by the poll, e.g. "Pick your favourite food"</td>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<th rowspan="4">Options</th>
+			<td>id</td>
+			<td>int(11)</td>
+			<td>Primary</td>
+			<td>autoincrement</td>
+			<td>Not used by the API; included for database integrity</td>
+		</tr>
+		<tr>
+			<td>PollId</td>
+			<td>int(11)</td>
+			<td>Foreign</td>
+			<td>References Polls.id</td>
+			<td>Poll that this answer belongs to</td>
+		</tr>
+		<tr>
+			<td>Answer</td>
+			<td>int(11)</td>
+			<td></td>
+			<td>Unique with PollId</td>
+			<td>Should correspond to an array index</td>
+		</tr>
+		<tr>
+			<td>AnswerText</td>
+			<td>varchar(255)</td>
+			<td></td>
+			<td></td>
+			<td>One of the options for a poll, e.g. "Chocolate biscuits"</td>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr>
+			<th rowspan="4">Votes</th>
+			<td>id</td>
+			<td>int(11)</td>
+			<td>Primary</td>
+			<td>autoincrement</td>
+			<td>Not used by the API; included for database integrity</td>
+		</tr>
+		<tr>
+			<td>PollId</td>
+			<td>int(11)</td>
+			<td>Foreign</td>
+			<td>References Options.PollId</td>
+			<td>Must correspond to a poll</td>
+		</tr>
+		<tr>
+			<td>Answer</td>
+			<td>int(11)</td>
+			<td>Foreign</td>
+			<td>References Options.Answer</td>
+			<td>Must correspond to one of the poll's answers</td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td>varchar(255)</td>
+			<td></td>
+			<td></td>
+			<td>IP address of the device that submitted the vote</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>Poll object</h4>
+<pre><code>{
+	"title": "Poll title",
+	"question": "Poll question",
+	"answers": ["Answer 1", "Answer 2"]
+}</code></pre>
+
+<h4>Vote counts object</h4>
+<pre><code>{
+	"votes": [1, 0, 0, 5, 2]
+}</code></pre>
+
+<h4>Vote object</h4>
+<pre><code>{
+	"address": "192.168.1.1",
+	"pollId": 2,
+	"answer": 0
+}</code></pre>
+
+<table>
+	<caption>Polls API Documentation</caption>
+	<thead>
+		<tr>
+			<th>Method</th>
+			<th>URI</th>
+			<th>Request Data</th>
+			<th>Response Data</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>GET</code></td>
+			<td><code>services/polls</code></td>
+			<td></td>
+			<td>Array of poll objects (without answers)</td>
+			<td>Read</td>
+		</tr>
+		<tr>
+			<td><code>POST</code></td>
+			<td><code>services/polls</code></td>
+			<td>Poll object</td>
+			<td>'Location' header with URI of newly created poll</td>
+			<td>Create</td>
+		</tr>
+		<tr>
+			<td><code>GET</code></td>
+			<td><code>services/polls/(:id)</code></td>
+			<td></td>
+			<td>Poll object</td>
+			<td>Read</td>
+		</tr>
+		<tr>
+			<td><code>DELETE</code></td>
+			<td><code>services/polls/(:id)</code></td>
+			<td></td>
+			<td></td>
+			<td>Delete</td>
+		</tr>
+		<tr>
+			<td><code>GET</code></td>
+			<td><code>services/votes/(:pollId)</code></td>
+			<td></td>
+			<td>Vote counts object</td>
+			<td>Read</td>
+		</tr>
+		<tr>
+			<td><code>DELETE</code></td>
+			<td><code>services/votes/(:pollId)</code></td>
+			<td></td>
+			<td></td>
+			<td>Delete</td>
+		</tr>
+		<tr>
+			<td><code>POST</code></td>
+			<td><code>services/votes/(:pollId)/(:answer)</code></td>
+			<td></td>
+			<td></td>
+			<td>Create</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><a class="button" href="#/about">Back</a></p>

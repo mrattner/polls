@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="one-half column">
+		<h3>Poll Administration</h3>
+	</div>
+	<div class="one-half column">
+		<p><a href="#/admin/create" class="button button-primary">
+			Create new poll</a></p>
+	</div>
+</div>
+
+<div class="row">
+<div class="two-thirds column">
+	<p data-ng-if="polls.length === 0 && !errorMsg">
+		There are no polls. Please create one.
+	</p>
+	<table data-ng-if="!errorMsg">
+		<tbody>
+		<tr data-ng-repeat="poll in polls">
+			<td>{{poll.title}}</td>
+			<td><a href="#/admin/{{poll.id}}" class="button">
+				View Votes
+			</a></td>
+			<td>
+				<button data-ng-click="deletePoll(poll.id, $index)">
+					Delete
+				</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div class="one-third column">
+	<p class="error" data-ng-show="errorMsg">{{errorMsg}}</p>
+	<p class="success" data-ng-show="successMsg">{{successMsg}}</p>
+</div>
+</div>

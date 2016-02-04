@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="one-third column">
+		<h3>Vote</h3>
+	</div>
+	<div class="two-thirds column">
+		<p><a href="#/polls" class="button">Back to poll list</a></p>
+	</div>
+</div>
+
+<div class="row">
+	<div class="twelve columns" data-ng-hide="errorMsg">
+		<h4>{{poll.title}}</h4>
+	</div>
+</div>
+
+<div class="row" data-ng-hide="errorMsg || successMsg">
+	<div class="twelve columns">
+		<p>{{poll.question}}</p>
+		<form name="voteForm" data-ng-submit="vote()">
+			<label data-ng-repeat="option in options">
+				<input type="radio" data-ng-model="$parent.choice" 
+					   name="answer" value="{{$index}}" required />
+				<span class="label-body">{{option.text}}</span>
+			</label>
+			<button type="submit" class="button-primary">Submit Vote</button>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="twelve columns">
+		<p class="error" data-ng-if="errorMsg">{{errorMsg}}</p>
+		<p class="success" data-ng-if="successMsg">{{successMsg}}</p>
+	</div>
+</div>

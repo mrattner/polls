@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="one-half column">
+		<h3>Poll Details</h3>
+	</div>
+	<div class="one-half column">
+		<p><a href="#/admin" class="button">Back to poll list</a></p>
+	</div>
+</div>
+
+<div class="row" data-ng-hide="errorMsg || successMsg">
+<div class="twelve columns">
+	<h4>{{poll.title}}</h4>
+	<p>{{poll.question}}</p>
+	<button type="button" data-ng-click="resetVotes()" data-ng-if="numVotes > 0"
+			class="button-primary">
+		Clear all votes for this poll
+	</button>
+	<table>
+		<caption>Total votes: {{numVotes}}</caption>
+		<thead>
+			<tr>
+				<th>Answer</th>
+				<th>Votes</th>
+				<th data-ng-if="numVotes > 0">Percentage</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="countObj in voteCounts">
+				<td>{{poll.answers[$index]}}</td>
+				<td>{{countObj.count}}</td>
+				<td data-ng-if="numVotes > 0">
+					{{(countObj.count * 100 / numVotes).toFixed(2)}}%
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+
+<div class="row">
+	<div class="twelve columns">
+		<p class="error" data-ng-if="errorMsg">{{errorMsg}}</p>
+		<p class ="success" data-ng-if="successMsg">{{successMsg}}</p>
+	</div>
+</div>

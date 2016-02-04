@@ -1,0 +1,68 @@
+/**
+ * Contains extra custom styles not provided by Skeleton.
+ * Author: Marcy Rattner
+ */
+
+.error {
+	color: #a00;
+}
+
+.success {
+	color: #090;
+}
+
+nav ul {
+	list-style-type: none;
+	margin-top: 2rem;
+}
+
+nav ul li {
+	display: inline-block;
+	font-size: 2rem;
+	margin-left: 2rem;
+}
+
+nav ul li:first-child {
+	margin-left: 0;
+}
+
+table caption {
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: left;
+}
+
+table code {
+	background: #fff;
+	border: none;
+}
+
+th:first-child + td {
+	padding-left: 0;
+}
+
+.u-half-width {
+	width: 50%;
+	box-sizing: border-box;
+}
+
+.inline {
+	display: inline;
+	margin-right: 2rem;
+}
+
+ul.form-options {
+	list-style-type: none;
+}
+
+ul.form-options li,
+ul.form-options li input,
+ul.form-options li button,
+table .button,
+table button {
+	margin-bottom: 0.2rem;
+}
+
+footer {
+	margin-bottom: 2rem;
+}

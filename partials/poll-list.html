@@ -1,0 +1,20 @@
+<div class="row">
+<div class="twelve columns">
+	<h3>Polls</h3>
+	<p data-ng-if="polls.length === 0 && !errorMsg">
+		There are no polls to vote in at the moment.
+	</p>
+	<table data-ng-if="!errorMsg">
+		<tbody>
+		<tr data-ng-repeat="poll in polls">
+			<td>{{poll.title}}</td>
+			<td>
+				<a href="#/vote/{{poll.id}}" class="button">Vote</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p class="error" data-ng-show="errorMsg">{{errorMsg}}</p>
+</div>
+</div>
