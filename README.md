@@ -41,7 +41,7 @@ Network's [JavaScript documentation](https://developer.mozilla.org/en-US/docs/We
 All of the styling is from [Skeleton](http://getskeleton.com/) except for a few rules in
 `polls-custom.css`. Skeleton uses external font resources from Google.
 
-The site favicon is from [http://www.favicon.cc/?action=icon&file_id=750216](favicon.cc).
+The site favicon is from [favicon.cc](http://www.favicon.cc/?action=icon&file_id=750216).
 
 ## API and back-end code
 
